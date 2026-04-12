@@ -1,12 +1,14 @@
 package pl.example.calc.controller;
 
 import org.springframework.web.bind.annotation.*;
+import pl.example.calc.annotation.ApiCalcExceptionMapper;
 import pl.example.calc.dto.SeriesDto;
 import pl.example.calc.dto.SeriesType;
 import pl.example.calc.service.CalcService;
 
 @RestController
 @RequestMapping("/api/calc")
+@ApiCalcExceptionMapper
 public class CalcController {
 
 	private final CalcService calcService;
