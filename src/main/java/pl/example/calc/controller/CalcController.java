@@ -1,6 +1,5 @@
 package pl.example.calc.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.example.calc.dto.SeriesDto;
 import pl.example.calc.dto.SeriesType;
