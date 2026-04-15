@@ -1,17 +1,18 @@
 package pl.example.calc.dto;
 
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
-public class SeriesDto {
-    private List<Double> values;
-    private SeriesType type;
+public record SeriesDto(
+
+        @NotNull(message = "Type can not be null")
+        SeriesType type,
+
+        @NotNull(message = "Values can not be null")
+        @NotEmpty(message = "Values can not be empty")
+        List<Double> values) {
 }

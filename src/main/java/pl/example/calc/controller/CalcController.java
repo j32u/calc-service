@@ -1,5 +1,6 @@
 package pl.example.calc.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import pl.example.calc.annotation.ApiCalcExceptionMapper;
 import pl.example.calc.dto.SeriesDto;
@@ -23,7 +24,7 @@ public class CalcController {
 	}
 
 	@PostMapping("/series/extend")
-	public SeriesDto createRandomNewSeries(@RequestBody SeriesDto dto, @RequestParam("n") int n) {
+	public SeriesDto createRandomNewSeries(@Valid @RequestBody SeriesDto dto, @RequestParam("n") int n) {
 		return calcService.createNewSeriesWithAdditionalElements(dto, n);
 	}
 

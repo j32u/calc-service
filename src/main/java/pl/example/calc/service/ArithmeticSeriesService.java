@@ -19,14 +19,22 @@ public class ArithmeticSeriesService {
     public static final String SUM_FORMULA_IS_INCORRECT = "Sum formula is incorrect";
     public static final String INCORRECT_ELEMENT_AT_POSITION_D = "incorrect element at position %d";
     public static final String TWO_VALUES_NEEDED_FOR_ARITHMETIC_SERIES_IN_ORDER_TO_CALCULATE_STEP = "two values needed for arithmetic series in order to calculate step";
+    public static final String INVALID_ARITHMETIC_SERIES_TYPE = "invalid arithmetic series type";
 
     public void validate(SeriesDto dto) {
+        validateIsArithmetic(dto);
         validateNotEmpty(dto);
         if (isSingleElement(dto)) {
             return;
         }
         validateSumFormulaOnSeries(dto);
         validateStep(dto);
+    }
+
+    private void validateIsArithmetic(SeriesDto dto) {
+        if (!SeriesType.arithmetic.equals(dto.type())) {
+            throw new IllegalArgumentException(INVALID_ARITHMETIC_SERIES_TYPE);
+        }
     }
 
     public SeriesDto createNewSeriesWithAdditionalElements(SeriesDto dto, int n) {
@@ -45,7 +53,7 @@ public class ArithmeticSeriesService {
     }
 
     private static @NonNull List<Double> getUpdatedSeries(SeriesDto dto, int n) {
-        return Stream.concat(dto.getValues().stream(), generateNextValuesStream(getLast(dto), calculateStep(dto), n)).toList();
+        return Stream.concat(dto.values().stream(), generateNextValuesStream(getLast(dto), calculateStep(dto), n)).toList();
     }
 
     private static @NonNull Stream<Double> generateNextValuesStream(Double element, double step, int count) {
@@ -53,7 +61,7 @@ public class ArithmeticSeriesService {
     }
 
     private void validateHasAtLeastTwoElements(SeriesDto dto) {
-        if (dto.getValues().size() < 2) {
+        if (dto.values().size() < 2) {
             throw new IllegalArgumentException(TWO_VALUES_NEEDED_FOR_ARITHMETIC_SERIES_IN_ORDER_TO_CALCULATE_STEP);
         }
     }
@@ -61,7 +69,7 @@ public class ArithmeticSeriesService {
     private void validateStep(SeriesDto dto) {
         double step = calculateStep(dto);
         Double first = getFirst(dto);
-        Iterator<Double> it = dto.getValues().iterator();
+        Iterator<Double> it = dto.values().iterator();
         int i = 0;
         while (it.hasNext()) {
             if (!it.next().equals(first + i++ * step)) {
@@ -85,7 +93,7 @@ public class ArithmeticSeriesService {
     }
 
     private static void validateNotEmpty(SeriesDto dto) {
-        if (CollectionUtils.isEmpty(dto.getValues())) {
+        if (CollectionUtils.isEmpty(dto.values())) {
             throw new IllegalArgumentException(ARITHMETIC_SERIES_MUST_HAVE_AT_LEAST_ONE_VALUE);
         }
     }
@@ -95,23 +103,23 @@ public class ArithmeticSeriesService {
     }
 
     private static @NonNull Double calculateSumFromSeries(SeriesDto dto) {
-        return dto.getValues().stream().reduce((sum, next) -> sum + next).orElseThrow();
+        return dto.values().stream().reduce((sum, next) -> sum + next).orElseThrow();
     }
 
     private static int getAmount(SeriesDto dto) {
-        return dto.getValues().size();
+        return dto.values().size();
     }
 
     private static Double getSecond(SeriesDto dto) {
-        return dto.getValues().get(1);
+        return dto.values().get(1);
     }
 
     private static Double getFirst(SeriesDto dto) {
-        return dto.getValues().get(0);
+        return dto.values().get(0);
     }
 
     private static @NonNull Double getLast(SeriesDto dto) {
-        return dto.getValues().stream().reduce((a, b) -> b).orElseThrow();
+        return dto.values().stream().reduce((a, b) -> b).orElseThrow();
     }
 
 }
