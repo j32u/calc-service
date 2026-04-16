@@ -57,7 +57,7 @@ public class ArithmeticSeriesService {
     }
 
     private static @NonNull Stream<Double> generateNextValuesStream(Double element, double step, int count) {
-        return IntStream.range(1, count).mapToDouble(value -> element + value * step).boxed();
+        return IntStream.range(1, count + 1).mapToDouble(value -> element + value * step).boxed();
     }
 
     private void validateHasAtLeastTwoElements(SeriesDto dto) {
