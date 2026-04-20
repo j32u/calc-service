@@ -68,13 +68,19 @@ public class ArithmeticSeriesService {
 
     private void validateStep(SeriesDto dto) {
         double step = calculateStep(dto);
-        Double first = getFirst(dto);
+        Double firstElement = getFirst(dto);
         Iterator<Double> it = dto.values().iterator();
-        int i = 0;
+        int seriesIndex = 0;
         while (it.hasNext()) {
-            if (!it.next().equals(first + i++ * step)) {
-                throw new IllegalArgumentException(INCORRECT_ELEMENT_AT_POSITION_D.formatted(i));
-            }
+            getI(it.next(), firstElement, seriesIndex, step);
+            seriesIndex++;
+        }
+    }
+
+    private static void getI(Double next, Double firstElement, int seriesIndex, double step) {
+        if (!next.equals(firstElement + seriesIndex * step)) {
+            int position = 1 + seriesIndex;
+            throw new IllegalArgumentException(INCORRECT_ELEMENT_AT_POSITION_D.formatted(position));
         }
     }
 

@@ -24,7 +24,7 @@ public class CalcController {
 	}
 
 	@PostMapping("/series/extend")
-	public SeriesDto createRandomNewSeries(@Valid @RequestBody SeriesDto dto, @RequestParam("n") int n) {
+	public SeriesDto createRandomNewSeries(@Valid @RequestBody SeriesDto dto, @RequestParam(value = "n", defaultValue = "1") int n) {
 		return calcService.createNewSeriesWithAdditionalElements(dto, n);
 	}
 

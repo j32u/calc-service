@@ -64,4 +64,15 @@ public class ArithmeticSeriesServiceTest {
                 .hasMessage(ArithmeticSeriesService.INCORRECT_ELEMENT_AT_POSITION_D.formatted(3));
     }
 
+    @Test
+    public void shouldPassFor0() {
+        SeriesDto dto = createArithmeticSeries(List.of(1., 2., 3., 4., 5.));
+        Assertions.assertThatCode(() -> service.createNewSeriesWithAdditionalElements(dto, 0)).doesNotThrowAnyException();
+    }
+
+    @Test
+    public void shouldTreatNegativeValueAsZero() {
+        SeriesDto dto = createArithmeticSeries(List.of(1., 2., 3., 4., 5.));
+        Assertions.assertThat(service.createNewSeriesWithAdditionalElements(dto, -10)).isEqualTo(dto);
+    }
 }
