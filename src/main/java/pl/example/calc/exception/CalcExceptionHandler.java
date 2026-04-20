@@ -1,5 +1,6 @@
 package pl.example.calc.exception;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -8,7 +9,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import pl.example.calc.annotation.ApiCalcExceptionMapper;
-import tools.jackson.databind.exc.InvalidFormatException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -52,7 +52,7 @@ public class CalcExceptionHandler {
 
         if (ex.getCause() instanceof InvalidFormatException jme) {
             if (!CollectionUtils.isEmpty(jme.getPath())) {
-                String propertyName = jme.getPath().get(jme.getPath().size()-1).getPropertyName();
+                String propertyName = jme.getPath().get(jme.getPath().size()-1).getFieldName();
                 String message = "Invalid value for field '%s': %s. Allowed values: %s";
                 problemDetail.setDetail(message.formatted(propertyName, jme.getValue(), getAllowedEnumValues(jme)));
                 problemDetail.setProperty("errorCode", "INVALID_ENUM_VALUE");

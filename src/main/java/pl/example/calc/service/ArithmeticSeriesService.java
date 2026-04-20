@@ -1,6 +1,6 @@
 package pl.example.calc.service;
 
-import org.jspecify.annotations.NonNull;
+import lombok.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import pl.example.calc.dto.SeriesDto;
