@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CalcServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CalcServiceApplication.class, args);
+		SpringApplication springApplication = new SpringApplication(CalcServiceApplication.class);
+//		springApplication.addListeners(new SwaggerConfigResource());
+		springApplication.run(args);
 	}
 
 }

@@ -1,16 +1,14 @@
 package pl.example.calc.controller;
 
-import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
 import pl.example.calc.annotation.ApiCalcExceptionMapper;
 import pl.example.calc.dto.SeriesDto;
 import pl.example.calc.dto.SeriesType;
 import pl.example.calc.service.CalcService;
 
 @RestController
-@RequestMapping("/api/calc")
 @ApiCalcExceptionMapper
-public class CalcController {
+public class CalcController implements CalcAPI{
 
 	private final CalcService calcService;
 
@@ -18,13 +16,13 @@ public class CalcController {
 		this.calcService = calcService;
 	}
 
-	@GetMapping("/series/random")
-	public SeriesDto createRandomNewSeries(@RequestParam("type") SeriesType seriesType) {
+	@Override
+	public SeriesDto createRandomNewSeries(SeriesType seriesType) {
 		return calcService.createRandomNewSeries(seriesType);
 	}
 
-	@PostMapping("/series/extend")
-	public SeriesDto createRandomNewSeries(@Valid @RequestBody SeriesDto dto, @RequestParam(value = "n", defaultValue = "1") int n) {
+	@Override
+	public SeriesDto createRandomNewSeries(SeriesDto dto, int n) {
 		return calcService.createNewSeriesWithAdditionalElements(dto, n);
 	}
 
