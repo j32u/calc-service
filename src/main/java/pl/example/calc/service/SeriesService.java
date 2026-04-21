@@ -5,11 +5,11 @@ import pl.example.calc.dto.SeriesDto;
 import pl.example.calc.dto.SeriesType;
 
 @Service
-public class CalcService {
+public class SeriesService {
 
 	private final ArithmeticSeriesService arithmeticSeriesService;
 
-	public CalcService(ArithmeticSeriesService arithmeticSeriesService) {
+	public SeriesService(ArithmeticSeriesService arithmeticSeriesService) {
         this.arithmeticSeriesService = arithmeticSeriesService;
     }
 

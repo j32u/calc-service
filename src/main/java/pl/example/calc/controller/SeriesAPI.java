@@ -15,15 +15,15 @@ import pl.example.calc.dto.SeriesDto;
 import pl.example.calc.dto.SeriesType;
 
 @Tag(name = "Ciągi", description = "Endpoint dedykowany na ciągi liczbowe")
-@RequestMapping("/api/calc")
-public interface CalcAPI {
+@RequestMapping("/api/calc/series")
+public interface SeriesAPI {
 
     @Operation(summary = "Generuj ciąg liczbowy", description = "Generuje ciąg liczbowy na podstawie typu ciągu.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok"),
             @ApiResponse(responseCode = "400", description = "Błąd walidacji")
     })
-    @GetMapping("/series/random")
+    @GetMapping("/random")
     SeriesDto createRandomNewSeries(
             @Parameter(description = "Typ generowanego ciągu liczbowego")
             @RequestParam("type") SeriesType seriesType);
@@ -34,7 +34,7 @@ public interface CalcAPI {
             @ApiResponse(responseCode = "200", description = "Ok"),
             @ApiResponse(responseCode = "400", description = "Błąd walidacji")
     })
-    @PostMapping("/series/extend")
+    @PostMapping("/extend")
     SeriesDto createRandomNewSeries(
             @Parameter(description = "Wzorcowy ciąg liczbowy")
             @Valid @RequestBody SeriesDto dto,

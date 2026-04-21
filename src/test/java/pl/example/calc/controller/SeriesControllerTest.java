@@ -1,4 +1,4 @@
 package pl.example.calc.controller;
 
-public class CalcControllerTest {
+public class SeriesControllerTest {
 }

@@ -20,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 public class HeaderIntegrationTest {
 
     public static final String URL = "http://127.0.0.1:%d/api/calc/series/random";
+
     @LocalServerPort
     private int port;
 

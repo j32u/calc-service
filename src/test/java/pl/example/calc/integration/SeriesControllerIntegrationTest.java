@@ -19,13 +19,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ANNOTATED)
-public class CalcControllerIntegrationTest {
+public class SeriesControllerIntegrationTest {
 
     private final MockMvc mockMvc;
     private final ObjectMapper objectMapper;
 
     @Autowired
-    public CalcControllerIntegrationTest(MockMvc mockMvc, ObjectMapper objectMapper) {
+    public SeriesControllerIntegrationTest(MockMvc mockMvc, ObjectMapper objectMapper) {
         this.mockMvc = mockMvc;
         this.objectMapper = objectMapper;
     }

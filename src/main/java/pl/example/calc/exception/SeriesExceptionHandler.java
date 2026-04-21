@@ -8,15 +8,15 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import pl.example.calc.annotation.ApiCalcExceptionMapper;
+import pl.example.calc.annotation.SeriesApiExceptionMapper;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
-@RestControllerAdvice(annotations = ApiCalcExceptionMapper.class)
-public class CalcExceptionHandler {
+@RestControllerAdvice(annotations = SeriesApiExceptionMapper.class)
+public class SeriesExceptionHandler {
 
     @ExceptionHandler(value = {IllegalArgumentException.class, NoSuchElementException.class})
     public ProblemDetail handleIllegalArgument(IllegalArgumentException ex) {
